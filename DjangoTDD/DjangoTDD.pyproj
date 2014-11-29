@@ -48,7 +48,7 @@
     <Folder Include="lists\templates\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="lists\templates\index.html" />
+    <Content Include="lists\templates\home.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
   </ItemGroup>
