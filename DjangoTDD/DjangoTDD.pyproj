@@ -29,7 +29,10 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="functional_tests.py">
+    <Compile Include="functional_tests\tests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="functional_tests\__init__.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="lists\models.py" />
@@ -46,6 +49,7 @@
     <Folder Include="DjangoTDD\" />
     <Folder Include="lists\" />
     <Folder Include="lists\templates\" />
+    <Folder Include="functional_tests\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="lists\templates\home.html" />
