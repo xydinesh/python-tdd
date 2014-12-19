@@ -13,7 +13,7 @@ class NewVisitorTest(LiveServerTestCase):
     self.browser.quit()
 
   def test_can_start_a_list_and_retrieve_it_later(self):
-    
+
     self.browser.get(self.live_server_url)
 
     # She notices the page title and head mention to-do lists
@@ -33,6 +33,8 @@ class NewVisitorTest(LiveServerTestCase):
     # When she hits ENTER, the page updates and now the page lists
     # 1: Buy peacock feathers
     inputbox.send_keys(Keys.ENTER)
+    edith_list_url = self.browser.current_url
+    self.assertRegex(edith_list_url, '/lists/.+')
     # send_keys is selenium way of input text
     self.check_for_row_in_list_table('1: Buy peacock feathers')
 
@@ -43,9 +45,12 @@ class NewVisitorTest(LiveServerTestCase):
     self.check_for_row_in_list_table('1: Buy peacock feathers')
     self.check_for_row_in_list_table('2: Use peacock feathers to make a fly')
 
-    # There is still a text box inviting her to add another item. She
-    # enters "Use peacock feathers to make a fly"
-    self.fail('Finish the test')
+    # Now a new user, Francis, comes along to the site
+    self.browser.quit()
+    seld.browser = webdriver.Firefox()
+
+    # Francis visit the home page. There is no sign of Edith's list
+    
 
     # The page updates again, and now show both items on her list
 
