@@ -50,10 +50,30 @@ class NewVisitorTest(LiveServerTestCase):
     seld.browser = webdriver.Firefox()
 
     # Francis visit the home page. There is no sign of Edith's list
+    self.browser.get(self.live_server_url)
+    page_text = self.browser.find_element_by_tag_name('body').text
+    self.assertNotIn('Buy peacock feathers', page_text)
+    self.assertNotIn('make a fly', page_text)
+
+    # Francis starts a new list by entering new Item. He is less intersting
+    # than Edith
+
+    inputbox = self.browser.find_element_by_id('id_new_item')
+    inpubox.send_keys('Buy milk')
+    inputbox.send_keys(Keys.ENTER)
+
+    # Francis gets his own url
+    francis_list_url = self.browser.current_url
+    self.assertRegex(francis_list_url, '/lists/.+')
+    self.assertNotEqual(francis_list_url, edith_list_url)
+
+    # again, there is no trace of Edith list
+    page_text = self.browser.find_element_by_tag_name('body').text
+    self.assertNotIn('Buy peacock feathers', page_text)
+    self.assertIn('Buy milk', page_text)
+
+    # Satisfied they both go back to sleep
     
-
-    # The page updates again, and now show both items on her list
-
   def check_for_row_in_list_table(self, row_text):
     table = self.browser.find_element_by_id('id_list_table')
     rows = table.find_elements_by_tag_name('tr')
