@@ -25,7 +25,7 @@ class NewVisitorTest(LiveServerTestCase):
     inputbox = self.browser.find_element_by_id('id_new_item')
     self.assertEqual(
       inputbox.get_attribute('placeholder'),
-      'Enter to do item'
+      'Enter to-do item'
     )
 
     # She is typing "Buy peacock feathers" into a text box
@@ -47,7 +47,7 @@ class NewVisitorTest(LiveServerTestCase):
 
     # Now a new user, Francis, comes along to the site
     self.browser.quit()
-    seld.browser = webdriver.Firefox()
+    self.browser = webdriver.Firefox()
 
     # Francis visit the home page. There is no sign of Edith's list
     self.browser.get(self.live_server_url)
@@ -59,7 +59,7 @@ class NewVisitorTest(LiveServerTestCase):
     # than Edith
 
     inputbox = self.browser.find_element_by_id('id_new_item')
-    inpubox.send_keys('Buy milk')
+    inputbox.send_keys('Buy milk')
     inputbox.send_keys(Keys.ENTER)
 
     # Francis gets his own url
@@ -73,7 +73,7 @@ class NewVisitorTest(LiveServerTestCase):
     self.assertIn('Buy milk', page_text)
 
     # Satisfied they both go back to sleep
-    
+
   def check_for_row_in_list_table(self, row_text):
     table = self.browser.find_element_by_id('id_list_table')
     rows = table.find_elements_by_tag_name('tr')
