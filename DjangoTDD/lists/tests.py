@@ -130,3 +130,9 @@ class ListViewTest(TestCase):
         list_ = List.objects.create()
         response = self.client.get('/lists/{0}/'.format(list_.id))
         self.assertTemplateUsed(response, 'list.html')
+
+    def test_passes_correct_list_to_template(self):
+        other_list = List.objects.create()
+        correct_list = List.objects.create()
+        response = self.client.get('/lists/{0}/'.format(correct_list.id))
+        self.assertEqual(response.context['list'], correct_list)
